@@ -1,7 +1,7 @@
 {
-  "name": "gitlab-login-checker",
+  "name": "gitlab-list-logins",
   "version": "0.0.0",
-  "description": "Analyzes the log files for login attacks",
+  "description": "Analyzes the log files for successful and failed logins",
   "main": "index.js",
   "scripts": {
     "lint": "standard --fix src/*.js",
