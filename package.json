@@ -1,0 +1,19 @@
+{
+  "name": "gitlab-login-checker",
+  "version": "0.0.0",
+  "description": "Analyzes the log files for login attacks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cg-tuwien/gitlab-login-checker.git"
+  },
+  "author": "Stephan Bösch-Plepelits <skunk@cg.tuwien.ac.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cg-tuwien/gitlab-login-checker/issues"
+  },
+  "homepage": "https://github.com/cg-tuwien/gitlab-login-checker#readme"
+}
