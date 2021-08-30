@@ -39,6 +39,6 @@ init(() => {
 
     const login = tables.audit.find({correlation_id: attempt.correlation_id})
 
-    console.log(attempt.time, attempt.remote_ip, params.username, login.length ? 'success' : 'fail')
+    console.log(attempt.time + '\t' + attempt.remote_ip + '\t' + params.username + '\t' + (login.length ? 'success' : 'fail'))
   })
 })
