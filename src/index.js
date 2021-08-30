@@ -1,3 +1,4 @@
+const fs = require('fs')
 const loki = require('lokijs')
 const async = require('async')
 
@@ -13,12 +14,20 @@ const tables = {
 const path = '/var/log/gitlab/gitlab-rails/'
 
 function init (callback) {
-  async.parallel([
-    done => populateDatabase(tables.audit, path + '/audit_json.log', done),
-    done => populateDatabase(tables.audit, path + '/audit_json.log.1.gz', done),
-    done => populateDatabase(tables.production, path + '/production_json.log', done),
-    done => populateDatabase(tables.production, path + '/production_json.log.1.gz', done)
-  ], callback)
+  fs.readdir(
+    path,
+    (err, files) => {
+      async.each(files, (file, done) => {
+        if (file.match(/^audit_json\.log/)) {
+          populateDatabase(tables.audit, path + file, done)
+        } else if (file.match(/^production_json\.log/)) {
+          populateDatabase(tables.production, path + file, done)
+        } else {
+          done()
+        }
+      }, callback)
+    }
+  )
 }
 
 init(() => {
