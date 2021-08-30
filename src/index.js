@@ -22,5 +22,14 @@ function init (callback) {
 }
 
 init(() => {
-  console.log(tables.audit.find())
+  const allLoginAttempts = tables.production.find({path: {'$regex': /^\/users\/auth\//}, method: 'POST'})
+
+  allLoginAttempts.forEach(attempt => {
+    let params = {}
+    attempt.params.forEach(param => params[param.key] = param.value)
+
+    const login = tables.audit.find({correlation_id: attempt.correlation_id})
+
+    console.log(attempt.time, attempt.remote_ip, params.username, login.length ? 'success' : 'fail')
+  })
 })
