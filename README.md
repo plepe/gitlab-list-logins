@@ -1,7 +1,7 @@
 Install:
 
 ```sh
-npm install -g https://github.com/cg-tuwien/gitlab-list-logins
+npm install -g https://github.com/plepe/gitlab-list-logins
 gitlab-list-logins --help
 ```
 

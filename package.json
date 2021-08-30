@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cg-tuwien/gitlab-login-checker.git"
+    "url": "git+https://github.com/plepe/gitlab-login-checker.git"
   },
   "author": "Stephan Bösch-Plepelits <skunk@cg.tuwien.ac.at>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cg-tuwien/gitlab-login-checker/issues"
+    "url": "https://github.com/plepe/gitlab-login-checker/issues"
   },
-  "homepage": "https://github.com/cg-tuwien/gitlab-login-checker#readme",
+  "homepage": "https://github.com/plepe/gitlab-login-checker#readme",
   "dependencies": {
     "argparse": "^2.0.1",
     "async": "^3.2.1",
