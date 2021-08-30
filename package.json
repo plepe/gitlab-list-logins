@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/cg-tuwien/gitlab-login-checker/issues"
   },
-  "homepage": "https://github.com/cg-tuwien/gitlab-login-checker#readme"
+  "homepage": "https://github.com/cg-tuwien/gitlab-login-checker#readme",
+  "dependencies": {
+    "async": "^3.2.1",
+    "line-reader": "^0.4.0",
+    "lokijs": "^1.5.12"
+  }
 }
