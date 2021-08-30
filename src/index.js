@@ -33,7 +33,20 @@ function init (options, callback) {
 }
 
 function parse (options, callback) {
-  const allLoginAttempts = tables.production.find({ path: { $regex: /^\/users\/(auth\/|sign_in)/ }, method: 'POST' })
+  const query = {
+    path: { $regex: /^\/users\/(auth\/|sign_in)/ },
+    method: 'POST'
+  }
+
+  if (options.date) {
+    query.time = { $regex: '^' + options.date }
+  }
+
+  if (options.ip) {
+    query.remote_ip = options.ip
+  }
+
+  const allLoginAttempts = tables.production.find(query)
 
   const result = allLoginAttempts.map(attempt => {
     const params = {}

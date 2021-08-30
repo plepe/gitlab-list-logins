@@ -13,6 +13,16 @@ parser.add_argument('--path', '-p', {
   default: '/var/log/gitlab/gitlab-rails'
 })
 
+parser.add_argument('--date', '-d', {
+  help: 'Filter results for the specified date (format: YYYY-MM-DD)',
+  default: null
+})
+
+parser.add_argument('--ip', {
+  help: 'Filter results for the specified IP address',
+  default: null
+})
+
 const args = parser.parse_args()
 
 gitlabListLogins(args, (err, result) => {
