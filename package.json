@@ -4,6 +4,7 @@
   "description": "Analyzes the log files for login attacks",
   "main": "index.js",
   "scripts": {
+    "lint": "standard --fix src/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "dependencies": {
     "async": "^3.2.1",
     "lokijs": "^1.5.12"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }
