@@ -15,7 +15,9 @@ const path = '/var/log/gitlab/gitlab-rails/'
 function init (callback) {
   async.parallel([
     done => populateDatabase(tables.audit, path + '/audit_json.log', done),
-    done => populateDatabase(tables.production, path + '/production_json.log', done)
+    done => populateDatabase(tables.audit, path + '/audit_json.log.1.gz', done),
+    done => populateDatabase(tables.production, path + '/production_json.log', done),
+    done => populateDatabase(tables.production, path + '/production_json.log.1.gz', done)
   ], callback)
 }
 
