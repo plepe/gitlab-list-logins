@@ -14,13 +14,12 @@ const tables = {
 // const path = '/var/log/gitlab/gitlab-rails/'
 const path = '/tmp/'
 
-function init (callback) {
+function init (options, callback) {
   fs.readdir(
     path,
     (err, files) => {
       if (err) {
-        console.error(err)
-        process.exit(1)
+        return callback(err)
       }
 
       async.each(files, (file, done) => {
@@ -36,10 +35,10 @@ function init (callback) {
   )
 }
 
-init(() => {
+function parse (options, callback) {
   const allLoginAttempts = tables.production.find({ path: { $regex: /^\/users\/(auth\/|sign_in)/ }, method: 'POST' })
 
-  allLoginAttempts.forEach(attempt => {
+  const result = allLoginAttempts.map(attempt => {
     const params = {}
     attempt.params.forEach(param => {
       params[param.key] = param.value
@@ -47,6 +46,23 @@ init(() => {
 
     const login = tables.audit.find({ correlation_id: attempt.correlation_id })
 
-    console.log(attempt.time + '\t' + attempt.remote_ip + '\t' + (params.username || params.user.login) + '\t' + (login.length ? 'success' : 'fail'))
+    return {
+      time: attempt.time,
+      remote_ip: attempt.remote_ip,
+      username: params.username || params.user.login,
+      success: !!login.length
+    }
   })
-})
+
+  callback(null, result)
+}
+
+module.exports = function (options, callback) {
+  init(options, (err) => {
+    if (err) {
+      return callback(err)
+    }
+
+    parse(options, callback)
+  })
+}
