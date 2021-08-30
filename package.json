@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/cg-tuwien/gitlab-login-checker#readme",
   "dependencies": {
+    "argparse": "^2.0.1",
     "async": "^3.2.1",
     "lokijs": "^1.5.12"
   },

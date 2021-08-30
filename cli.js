@@ -1,6 +1,14 @@
 #!/usr/bin/env node
+const ArgumentParser = require('argparse').ArgumentParser
 
 const gitlabListLogins = require('./src/index')
+
+const parser = new ArgumentParser({
+  add_help: true,
+  description: 'Analyzes the log files for successful and failed logins'
+})
+
+const args = parser.parse_args()
 
 gitlabListLogins({}, (err, result) => {
   if (err) {
