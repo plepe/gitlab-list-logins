@@ -11,12 +11,9 @@ const tables = {
   production: db.addCollection('production')
 }
 
-// const path = '/var/log/gitlab/gitlab-rails/'
-const path = '/tmp/'
-
 function init (options, callback) {
   fs.readdir(
-    path,
+    options.path,
     (err, files) => {
       if (err) {
         return callback(err)
@@ -24,9 +21,9 @@ function init (options, callback) {
 
       async.each(files, (file, done) => {
         if (file.match(/^audit_json\.log/)) {
-          populateDatabase(tables.audit, path + file, done)
+          populateDatabase(tables.audit, options.path + '/' + file, done)
         } else if (file.match(/^production_json\.log/)) {
-          populateDatabase(tables.production, path + file, done)
+          populateDatabase(tables.production, options.path + '/' + file, done)
         } else {
           done()
         }
