@@ -14,7 +14,7 @@ parser.add_argument('--path', '-p', {
 })
 
 parser.add_argument('--date', '-d', {
-  help: 'Filter results for the specified date (format: YYYY-MM-DD)',
+  help: 'Filter results for the specified date (format: YYYY-MM-DD). Also "today" and "yesterday" are valid dates.',
   default: null
 })
 
@@ -24,6 +24,19 @@ parser.add_argument('--ip', {
 })
 
 const args = parser.parse_args()
+
+if (args.date) {
+  switch (args.date) {
+    case 'today':
+      args.date = new Date().toISOString().substr(0, 10)
+      break
+    case 'yesterday':
+      let d = new Date()
+      d.setDate(d.getDate() - 1)
+      args.date = d.toISOString().substr(0, 10)
+      break
+  }
+}
 
 gitlabListLogins(args, (err, result) => {
   if (err) {
